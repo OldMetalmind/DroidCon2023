@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workshop/src/blocs/task_cubit.dart';
+import 'package:workshop/src/navigation/navigation.dart';
+import 'package:workshop/src/views/todos_page_view.dart';
 
 class TodoPage extends StatelessWidget {
   const TodoPage({super.key});
@@ -15,28 +17,31 @@ class TodoPage extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           /// Navigate where?
+          context.toAddPage();
         },
       ),
       body: BlocBuilder<TaskCubit, TaskState>(
         builder: (context, state) {
           return state.status.when(
             initial: () {
-              // TODO Load task
-              // TODO Show loading indicator
-              throw UnimplementedError();
+              context.read<TaskCubit>().loadTasks();
+              return const CircularProgressIndicator();
             },
             loading: () {
-              // TODO Load task
-              // TODO Show loading indicator
-              throw UnimplementedError();
+              return const CircularProgressIndicator();
             },
             success: () {
-              // TODO Show View
-              throw UnimplementedError();
+              return const TasksPageView();
             },
             failure: (error) {
-              /// TODO Show error
-              throw UnimplementedError();
+              return Container(
+                color: Colors.red,
+                child: Center(
+                  child: Text(
+                    error.toString(),
+                  ),
+                ),
+              );
             },
           );
         },

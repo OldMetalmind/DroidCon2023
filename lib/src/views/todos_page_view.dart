@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workshop/src/blocs/task_cubit.dart';
 import 'package:workshop/src/widgets/task_list_item.dart';
 
-class TasksView extends StatelessWidget {
-  const TasksView({
+class TasksPageView extends StatelessWidget {
+  const TasksPageView({
     super.key,
   });
 
