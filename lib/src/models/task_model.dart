@@ -13,4 +13,7 @@ class Task with _$Task {
     @Default(false) bool done,
     DateTime? deadline,
   }) = _Task;
+
+
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }
